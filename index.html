@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Assignment 01</title>
+  </head>
+  <body>
+    <ul id="taskList"></ul>
+
+    <form name="toDo">
+      <!-- cut out this from form that populated in default: action="index.html" method="post" -->
+      <input type="text" name="description" value="Task Description">
+      <fieldset>
+        <legend>Task Owner</legend>
+        <input type="radio" name="owner" value="Amy">Amy
+        <input type="radio" name="owner" value="Nick">Nick
+        <input type="radio" name="owner" value="Kermit">Kermit the Frog
+      </fieldset>
+      <fieldset>
+        <legend>Difficulty</legend>
+        <select class="difficulty" name="Difficulty">
+          <option value="supEasy">Super Easy</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+          <option value="unreal">UNREAL</option>
+        </select>
+      </fieldset>
+
+
+
+
+      <input type="submit" name="submit" value="SUBMIT YO">
+
+
+    </form>
+
+    <script type="text/javascript">
+    var tasks = {
+                // owner: "",
+                // description: "",
+                // Difficulty: ""
+              };
+
+
+
+    function taskBuilder(){
+      console.log("adding some task");
+      event.preventDefault();
+      var form = document.querySelector("form");
+      var newTaskDesc = {description: form.description.value}
+      //insert newtask into tasks object
+      tasks.description.push(newTaskDesc);
+      console.log(newTaskDesc);
+      drawList();
+      }
+
+    function drawList(){
+      event.preventDefault();
+      console.log("adding item to a list in HTML");
+      //select list container element from html
+      var parent = document.getElementById('taskList');
+      //clear existing contents
+      parent.innerHTML = "";
+
+      //create ul node
+      var ul = document.createElement('ul');
+      //loop through to create li for each object in tasks
+      for(var i =0; i<tasks.length; i++){
+        var li = document.createElement('li');
+        //add task string to the li
+        li.innerHTML = tasks[i];
+        console.log(tasks[i]);
+        //append li to the ul
+        ul.appendChild(li);
+      }
+    }
+
+    window.onload = function(){
+      //adds drawlist to execute upon window load
+      drawList();
+      //select form and attach taskBuilder as the onSubmit handler
+      var form = document.querySelector("form");
+      //don't use parans because we aren't actually calling the function
+      form.onsubmit = taskBuilder;
+      console.log("well hey there the window has loaded");
+
+    }
+
+    </script>
+
+  </body>
+</html>
