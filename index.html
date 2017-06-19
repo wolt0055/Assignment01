@@ -5,7 +5,9 @@
     <title>Assignment 01</title>
   </head>
   <body>
-    <ul id="taskList"></ul>
+    <div id="taskList">
+
+  </div>
 
     <form name="toDo">
       <!-- cut out this from form that populated in default: action="index.html" method="post" -->
@@ -37,10 +39,11 @@
 
     <script type="text/javascript">
     var tasks = {
-                // owner: "",
-                // description: "",
-                // Difficulty: ""
-              };
+      "description": [],
+      "owner": [],
+      "Difficulty":[]
+    }
+
 
 
 
@@ -49,9 +52,15 @@
       event.preventDefault();
       var form = document.querySelector("form");
       var newTaskDesc = {description: form.description.value}
+      var newTaskOwner = {description: form.owner.value}
+      var newTaskDifficulty = {description: form.Difficulty.value}
       //insert newtask into tasks object
+      // console.log(newTaskDesc);
       tasks.description.push(newTaskDesc);
-      console.log(newTaskDesc);
+      tasks.owner.push(newTaskOwner);
+      tasks.Difficulty.push(newTaskDifficulty);
+
+
       drawList();
       }
 
@@ -61,22 +70,27 @@
       //select list container element from html
       var parent = document.getElementById('taskList');
       //clear existing contents
+      console.log(parent);
       parent.innerHTML = "";
+      // console.log(parent);
 
       //create ul node
       var ul = document.createElement('ul');
+      console.log(ul);
       //loop through to create li for each object in tasks
-      for(var i =0; i<tasks.length; i++){
+      for(var i =0; i<tasks.description.length; i++){
         var li = document.createElement('li');
         //add task string to the li
-        li.innerHTML = tasks[i];
-        console.log(tasks[i]);
+        li.innerHTML = "Owner is: " + tasks.owner[i].value;
+        // console.log(tasks.owner[i]);
         //append li to the ul
         ul.appendChild(li);
       }
+      parent.appendChild(ul);
     }
 
     window.onload = function(){
+
       //adds drawlist to execute upon window load
       drawList();
       //select form and attach taskBuilder as the onSubmit handler
