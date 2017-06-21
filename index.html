@@ -3,15 +3,31 @@
   <head>
     <meta charset="utf-8">
     <title>Assignment 01</title>
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+    <style>
+      h1, li {
+        font-family: 'Gloria Hallelujah', cursive;
+      }
+      h1 {
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
+    <header>
+      <h1>Productivity Begins Here</h1>
+    </header>
     <div id="taskList">
 
-  </div>
+    </div>
 
     <form name="toDo">
       <!-- cut out this from form that populated in default: action="index.html" method="post" -->
-      <input type="text" name="description" value="Task Description">
+      <fieldset>
+        <legend>Describe your task to accomplish</legend>
+        <input type="text" name="description" value="Task Description">
+      </fieldset>
+
       <fieldset>
         <legend>Task Owner</legend>
         <input type="radio" name="owner" value="Amy">Amy
@@ -21,10 +37,10 @@
       <fieldset>
         <legend>Difficulty</legend>
         <select class="difficulty" name="Difficulty">
-          <option value="supEasy">Super Easy</option>
+          <option value="super easy">Super Easy</option>
           <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
+          <option value="moderately difficult">Moderate</option>
+          <option value="challenging">Challenging</option>
           <option value="unreal">UNREAL</option>
         </select>
       </fieldset>
@@ -38,7 +54,7 @@
     </form>
 
     <script type="text/javascript">
-    var tasks = {
+    var taskList = {
       "description": [],
       "owner": [],
       "Difficulty":[]
@@ -51,14 +67,15 @@
       console.log("adding some task");
       event.preventDefault();
       var form = document.querySelector("form");
-      var newTaskDesc = {description: form.description.value}
-      var newTaskOwner = {description: form.owner.value}
-      var newTaskDifficulty = {description: form.Difficulty.value}
+      var newTaskDesc = form.description.value
+      var newTaskOwner = form.owner.value
+      var newTaskDifficulty = form.Difficulty.value
       //insert newtask into tasks object
       // console.log(newTaskDesc);
-      tasks.description.push(newTaskDesc);
-      tasks.owner.push(newTaskOwner);
-      tasks.Difficulty.push(newTaskDifficulty);
+      taskList.description.push(newTaskDesc)
+      taskList.owner.push(newTaskOwner)
+
+      taskList.Difficulty.push(newTaskDifficulty)
 
 
       drawList();
@@ -78,10 +95,10 @@
       var ul = document.createElement('ul');
       console.log(ul);
       //loop through to create li for each object in tasks
-      for(var i =0; i<tasks.description.length; i++){
+      for(var i =0; i<taskList.description.length; i++){
         var li = document.createElement('li');
         //add task string to the li
-        li.innerHTML = "Owner is: " + tasks.owner[i].value;
+        li.innerHTML = taskList.Difficulty[i] + " task to be done by " + taskList.owner[i] + " is: " + taskList.description[i];
         // console.log(tasks.owner[i]);
         //append li to the ul
         ul.appendChild(li);
